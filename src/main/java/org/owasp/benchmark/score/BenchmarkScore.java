@@ -48,6 +48,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.owasp.benchmark.score.parsers.YagaanReader;
 import org.owasp.benchmark.score.parsers.AcunetixReader;
 import org.owasp.benchmark.score.parsers.AppScanDynamicReader;
 import org.owasp.benchmark.score.parsers.AppScanDynamicReader2;
@@ -658,7 +659,11 @@ public class BenchmarkScore {
             if ( line2.contains("Coverity") || line2.contains("formatVersion") ) {
                 tr = new CoverityReader().parse( fileToParse );
             }
-        }
+        }else if (filename.endsWith(".yson")) {
+
+			tr = new YagaanReader().parse(fileToParse);
+
+		}
 
         else if ( filename.endsWith( ".txt" ) ) {
             String line1 = getLine( fileToParse, 0 );
